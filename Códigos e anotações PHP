@@ -1,0 +1,336 @@
+//Aula 30.08
+
+<?php
+$nome = "Mariana";
+echo ("Olá $nome");
+?>
+
+//Variáveis
+
+<?php
+$valor = 10;
+$nome = "Ferri";
+$preco = 12.50;
+echo ("Valores das variáveis ="."" ".$valor" ".$nome" ".$preco");
+?>
+
+<?php
+$nome = "Mariana";
+echo ('Olá, $nome');
+?>
+
+//Converter
+
+<?php
+$teste = 10;
+var_dump($teste);
+$teste = "Felipe";
+var_dump($teste);
+?>
+
+//Tag html
+
+<?php
+$teste = 10;
+echo ("valor de teste = " .$teste. "<br>");
+?>
+
+<?php
+$valor1 = "1";
+$valor2 = $valor1+1;
+echo ("Valor = " .$valor2. "<br>");
+var_dump($valor2);
+?>
+
+<?php
+$inteiro = 100;
+$decimal = (double)$inteiro;
+var_dump($inteiro);
+?>
+
+<?php
+$inteiro = 100;
+$decimal = (double)$inteiro;
+var_dump($inteiro);
+$texto = (string)$inteiro;
+var_dump($texto);
+?>
+
+<?php
+echo ("teste <br> teste");
+?>
+
+<?php
+$num1 = 10;
+$num2 = 2;
+$resultado = $num1+$num2;
+echo ("O valor da soma é = " .$resultado);
+?>
+
+<?php
+$valor = 10;
+echo ("Valor = " .$valor. "<br>");
+$valor += 1;
+echo ("Valor = " .$valor. "<br>");
+$valor -= 2;
+echo ("Valor = " .$valor. "<br>");
+$valor *= 2;
+echo ("Valor = " .$valor. "<br>");
+$valor /= 2;
+echo ("Valor = " .$valor. "<br>");
+$valor %= 2;
+?>
+
+//Atribuição
+
+<?php
+$valor = "Olá ";
+$valor .= "Mundo";
+echo ($valor);
+?>
+
+<?php
+$a = 10;
+$b = 9;
+if ($a > $b)
+echo ("A é maior que B");
+?>
+
+//If - else
+	
+<?php
+$a = 90;
+$b = 10;
+if ($a > $b) {
+echo ("A é maior que B");
+} else {
+echo ("A não é maior que B");
+}
+?>
+
+//Aula 31.08
+
+<?php
+const NOME = "Juliana";
+echo ("O seu nome é ". nome);
+?>
+
+<?php
+$time = "Real";
+echo 'o $time é o "melhor" do mundo;
+?>
+<?php
+for ($n=1;$n<=10;$n++){
+	echo ("Valor de mum =" .$n. "<br>");
+}
+?>
+
+<?php
+    $turma = "Turma da ti94";
+    $procura = strpos($turma,"T") ;
+    if ($procura >-1){
+      echo "Encontrado";}
+    else{
+      echo "Não econtrado";}
+?>
+
+<?php
+  $nome = "mariana";
+  echo ucfirst($nome); 
+  ?>
+  
+<?php  
+  $lista = ["Pedro","Giovanna","Lucas","João","Perse","Felipe"];
+    $busca = array_filter($lista,function ($item){
+      if ($item == 'Lucas'){
+        return true;}
+        else{
+          return false;}});
+          print_r ($busca);
+          echo $busca[0];
+?>
+
+<?php
+  $alunos = ["Pedro","Giovanna","Lucas","João","Perse","Felipe"];
+  foreach($alunos as $chave => $aluno){
+    if($aluno == "Pedro")
+    echo ("Nome: ".$aluno."-".$chave."<br>");};
+?>
+
+//Aula 06.09
+
+/*Conectar um banco de dados no php
+
+<?php
+$host = "localhost";
+$user = "root";
+$pass = "";
+$dbname = "database_teste";
+$port=3306;
+
+try{
+    $conn=new PDO("mysql:host=$host;port=$port;dbname=".$dbname,$user,$pass);
+    echo "Conectado com sucesso!";
+}
+catch(PDOException $err){
+    echo "Falha na conexão.".$err->getMessage();
+}
+?>	
+
+<?php
+$select_alunos  = "SELECT * FROM aluno";
+$resultado = $conn->query($select_alunos);
+
+if ($resultado->rowCount() > 0) {
+    while ($row = $resultado->fetch(PDO::FETCH_ASSOC)) {
+        echo "COD: " . $row['COD'] . " - Nome: " . $row['NOME'] . " - CPF: " . $row['CPF'] . " - RG: " . $row['RG'] . "<br>";
+    }
+} else {
+    echo "Nenhum resultado encontrado";
+}
+?>
+
+<?php
+$query = 'select * from aluno';
+$state = $conn->query($query);
+$registro = $state->fetchAll();
+print_r($registro);
+?>
+
+<?php
+$query = 'select nome from aluno where nome = "Lucas"';
+$state = $conn->query($query);
+$registro = $state->fetchAll();
+print_r($registro);
+?>
+
+<?php
+$query = 'select * from aluno';
+$state = $conn->query($query);
+$registro = $state->fetchAll();
+echo '<pre>';
+print_r($registro);
+echo '</pre>';
+?>
+
+<?php
+$query = 'select * from aluno';
+$state = $conn->query($query);
+$registro = $state->fetchAll();
+echo $registro[0]['NOME'].'<br>';
+echo $registro[1]['NOME'].'<br>';
+echo $registro[2]['NOME'].'<br>';
+echo $registro[3]['NOME'].'<br>';
+echo $registro[4]['NOME'].'<br>';
+echo $registro[5]['NOME'].'<br>';
+?>
+
+<?php
+$query = 'select * from aluno';
+$estate = $conn->query($query);
+$registro = $estate->fetchAll(PDO::FETCH_ASSOC);
+echo '<pre>';
+print_r($registro);
+echo '</pre>';
+?>
+
+<?php
+$query = 'select * from aluno';
+$estate = $conn->query($query);
+$registro = $estate->fetchAll(PDO::FETCH_NUM);
+echo '<pre>';
+print_r($registro);
+echo '</pre>';
+?>
+
+<?php
+$query = 'select * from aluno';
+$estate = $conn->query($query);
+$registro = $estate->fetchAll(PDO::FETCH_BOTH);
+echo '<pre>';
+print_r($registro);
+echo '</pre>';
+?>
+
+<?php
+$query = 'SELECT * from aluno where cod=8';
+$state = $conn->query($query);
+$registro = $state->fetch(PDO::FETCH_OBJ);
+echo '<pre>';
+print_r($registro);
+echo '</pre>';
+
+<?php
+include_once "conect.php";
+if (isset($_POST['Enviar'])){
+  $nome = $_POST['nome'];
+  $email = $_POST['email'];
+  $senha = $_POST['senha'];
+  $query=$conn->prepare("insert into usuarios(usuarioNome, usuarioEmail, usuarioSenha) values ('$nome', '$email' , '$senha')");
+}
+ ?>
+ 
+ <?php
+include_once "conect.php";
+if (isset($_POST['Enviar'])){
+  $nome = $_POST['nome'];
+  $email = $_POST['email'];
+  $senha = $_POST['senha'];
+  $query=$conn->prepare("insert into usuarios(usuarioNome,usuarioEmail,usuarioSenha) values (:n,:e,:s)");
+  $query->bindValue(':n',$nome);
+  $query->bindValue(':e',$email);
+  $query->bindValue(':s',$senha);
+  $query->execute();
+}
+ ?>
+ 
+ <?php
+include_once "conect.php";
+if (isset($_POST['Enviar'])){
+  $nome = $_POST['nome'];
+  $email = $_POST['email'];
+  $senha = $_POST['senha'];
+  $query=$conn->prepare("insert into usuarios(usuarioNome,usuarioEmail,usuarioSenha) values (:n,:e,:s)");
+  $query->execute([':n'=>$nome, ':e'=>$email, ':s'=>$senha]);
+}
+ ?>
+ 
+ 
+ <?php
+include_once "conect.php";
+if (isset($_POST['delete'])){
+  $cod = $_POST['cod'];
+  $cmd=$conn->prepare("delete from usuarios where usuarioID=:id");
+  $cmd->bindValue(':id',$cod);
+  $cmd->execute();}
+ ?>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Aula 05.09</title>
+</head>
+
+<body>
+  <header>
+  <h2>Cadastro de Usuário</h2>
+  </header>
+
+  <main>  
+  <form method="POST" action="index.php">
+  <label>Nome: </label>
+  <input type="text" name="nome" placeholder="Digite o seu nome" require><br><br> 
+    <label>Email: </label>
+  <input type="email" name="email" placeholder="Digite o seu email" require><br><br>
+  <label>Senha: </label>
+  <input type="password" name="senha" placeholder="Digite a senha" require><br><br>
+  <input type="submit" name="Enviar" value="Cadastrar"><br><br><br>
+
+  <input type="text" name="cod" placeholder="Digite o código que deseja excluir" require><br><br>
+  <input type="submit" name="delete" value="Deletar"><br><br><br>
+  </form>
+  </main>
+</body>
+
+</html>
